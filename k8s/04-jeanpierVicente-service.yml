@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: jeanpiervicente-api-service
+  namespace: jeanpiervicente-api-ms
+  labels:
+    app: jeanpiervicente-api
+spec:
+  selector:
+    app: jeanpiervicente-api
+  type: NodePort
+  ports:
+    - port: 8085
+      protocol: TCP
+      targetPort: 8085
+      nodePort: 30080

@@ -1,0 +1,24 @@
+package pe.edu.vallegrande.jeanpier_persona_rest.model;
+
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.relational.core.mapping.Table;
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+@Table("personas")
+public class Persona {
+
+    @Id
+    private Long id;
+
+    private String nombre;
+    private String apellido;
+    private String email;
+
+}

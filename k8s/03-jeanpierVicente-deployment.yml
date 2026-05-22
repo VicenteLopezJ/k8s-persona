@@ -1,0 +1,49 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: jeanpiervicente-api-deployment
+  namespace: jeanpiervicente-api-ms
+  labels:
+    app: jeanpiervicente-api
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: jeanpiervicente-api
+  template:
+    metadata:
+      labels:
+        app: jeanpiervicente-api
+    spec:
+      containers:
+        - name: jeanpiervicente-api
+          image: llampier2/jeanpiervicente-api:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8085
+          env:
+            - name: APP_ENV
+              valueFrom:
+                configMapKeyRef:
+                  key: APP_ENV
+                  name: jeanpiervicente-api-config
+            - name: APP_VERSION
+              valueFrom:
+                configMapKeyRef:
+                  key: APP_VERSION
+                  name: jeanpiervicente-api-config
+            - name: APP_PORT
+              valueFrom:
+                configMapKeyRef:
+                  key: APP_PORT
+                  name: jeanpiervicente-api-config
+            - name: SECRET_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  key: username
+                  name: jeanpiervicente-api-secret
+            - name: SECRET_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  key: password
+                  name: jeanpiervicente-api-secret
